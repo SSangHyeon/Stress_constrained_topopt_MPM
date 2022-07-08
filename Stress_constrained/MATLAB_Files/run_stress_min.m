@@ -15,7 +15,7 @@ end
 importfile('ample_L'); importfile('mesh_L');  importfile('kp_L');importfile('uvw_L');
 importfile('fd_L'); importfile('fint_L'); importfile('kt_L'); importfile('B_L'); importfile('D_L');
 
-rmin =5;
+rmin =3;
 [Hs,H]=prepare_filter(rmin,carriers);
 
 x=0.5*ones(nmp,1);
