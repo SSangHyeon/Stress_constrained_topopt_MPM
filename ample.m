@@ -19,6 +19,10 @@
 % POSTPRO               - post processing function including vtk output
 %--------------------------------------------------------------------------
 clear; clc; close;
+
+
+
+
 addpath('constitutive','functions','plotting','setup');        
 [lstps,g,mpData,mesh] = setupGrid_beam;                                          % setup information
 NRitMax = 10; tol = 1e-9;                                                   % Newton Raphson parameters
