@@ -37,7 +37,7 @@ raa     = 0.0001;
 raa0eps = 0.0000001;
 raaeps  = 0.0000001;
 outeriter = 0;
-maxoutit  =50;
+maxoutit  =100;
 kkttol  = 0;
 x_his=zeros(nmp,maxoutit);
 if outeriter < 0.5

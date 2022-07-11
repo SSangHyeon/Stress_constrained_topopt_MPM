@@ -16,9 +16,9 @@ ce = H*(ce(:)./Hs);
 
 figure(1); scatter(carriers(1,:),carriers(2,:),40,-x,"filled","s");axis equal;axis off; colormap('gray');title('material layout');drawnow;
 figure(2); scatter(carriers(1,:),carriers(2,:),40,MISES,"filled","s"); axis equal;axis off; colormap('jet');title('Von-Mises Stress');colorbar;drawnow;
-figure(3); scatter(carriers(1,:),carriers(2,:),40,pnorm_sen,"filled","s"); axis equal;axis off; colormap('jet');title('stress sensitivity');colorbar;drawnow;
+% figure(3); scatter(carriers(1,:),carriers(2,:),40,pnorm_sen,"filled","s"); axis equal;axis off; colormap('jet');title('stress sensitivity');colorbar;drawnow;
 % figure(4); plot3(carriers(1,:),carriers(2,:),pnorm_sen,'.'); colormap('jet'); xlabel('x'); ylabel('y'); zlabel('sensitivity');drawnow;
-figure(5); scatter(carriers(1,:),carriers(2,:),40,ce,"filled","s"); axis equal;axis off; colormap('jet');title('compliance sensitivity');colorbar;drawnow;
+% figure(5); scatter(carriers(1,:),carriers(2,:),40,ce,"filled","s"); axis equal;axis off; colormap('jet');title('compliance sensitivity');colorbar;drawnow;
 dv = ones(nmp,1)/(nmp);
 dv(:) = (H*dv(:))./Hs;
 fval=[mean(x)-0.5;pnorm/100];
