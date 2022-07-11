@@ -1,6 +1,5 @@
 function [pnorm,pnorm_sen,von,x,ce]=Stress_Sensitivity_Comp(x,penal,q,p,B,D,fd,kp,mpData,tot_uvw,fint)
 addpath('setup','functions');
-nc = 100; sigmay = 10;
 nmp  = length(mpData);                                                      % number of material points  
 von = zeros(nmp,1);
 edofMat = zeros(nmp,8);

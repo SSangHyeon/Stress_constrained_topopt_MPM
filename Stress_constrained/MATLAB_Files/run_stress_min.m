@@ -1,9 +1,6 @@
-clc
-clear
-close('all');
-warning('off','all')
+clc; clear; close('all'); warning('off','all')
 addpath('setup','functions','comp','MMA');
-% [lstps,g,mpData,mesh,mp] = setupGrid_beam_40_20_1;
+
 importfile('mpdata_L');
 nmp  = length(mpData);
 carriers = zeros(3,nmp);
@@ -15,7 +12,7 @@ end
 importfile('ample_L'); importfile('mesh_L');  importfile('kp_L');importfile('uvw_L');
 importfile('fd_L'); importfile('fint_L'); importfile('kt_L'); importfile('B_L'); importfile('D_L');
 
-rmin =3;
+rmin =1;
 [Hs,H]=prepare_filter(rmin,carriers);
 
 x=0.5*ones(nmp,1);
@@ -90,9 +87,10 @@ end
 %% figure
 figure(6)
 yyaxis left
-plot(f(1:outit,1),f(1:outit,2),'-o'); ylabel('Compliance & P-norm stress\/100');
+plot(f(1:outit,1),f(1:outit,2),'-o'); ylabel('Compliance & P-norm stress/100');
 hold on;
-plot(f(1:outit,1),f(1:outit,4)./100,'-*'); 
+plot(f(1:outit,1),f(1:outit,4)./100,'-*');
 yyaxis right
 plot(f(1:outit,1),f(1:outit,3),'-x'); ylabel('volume');
 xlabel('iteration');
+legend('compliance','P-norm stress','volume');

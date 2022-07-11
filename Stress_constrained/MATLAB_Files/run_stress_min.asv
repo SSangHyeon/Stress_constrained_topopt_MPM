@@ -1,9 +1,6 @@
-clc
-clear
-close('all');
-warning('off','all')
+clc; clear; close('all'); warning('off','all')
 addpath('setup','functions','comp','MMA');
-% [lstps,g,mpData,mesh,mp] = setupGrid_beam_40_20_1;
+
 importfile('mpdata_L');
 nmp  = length(mpData);
 carriers = zeros(3,nmp);
@@ -56,9 +53,6 @@ f = zeros(maxoutit,4);
 while  outit < maxoutit 
 outit   = outit+1;
 outeriter = outeriter+1;
-if outit == 2
-    abran = 1;
-end
 %% GCMMA %%
 %%%% The parameters low, upp, raa0 and raa are calculated:
 [low,upp,raa0,raa] = ...
@@ -93,9 +87,10 @@ end
 %% figure
 figure(6)
 yyaxis left
-plot(f(1:outit,1),f(1:outit,2),'-o'); ylabel('Compliance & P-norm stress\/10');
+plot(f(1:outit,1),f(1:outit,2),'-o'); ylabel('Compliance & P-norm stress/100');
 hold on;
-plot(f(1:outit,1),f(1:outit,4),'-*'); 
+plot(f(1:outit,1),f(1:outit,4)./100,'-*'); 
 yyaxis right
 plot(f(1:outit,1),f(1:outit,3),'-x'); ylabel('volume');
 xlabel('iteration');
+legend
