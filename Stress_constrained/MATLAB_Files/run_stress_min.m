@@ -3,7 +3,6 @@ clear
 close('all');
 warning('off','all')
 addpath('setup','functions','comp','MMA');
-% [lstps,g,mpData,mesh,mp] = setupGrid_beam_40_20_1;
 importfile('mpdata_L');
 nmp  = length(mpData);
 carriers = zeros(3,nmp);
@@ -19,7 +18,7 @@ rmin =1;
 [Hs,H]=prepare_filter(rmin,carriers);
 
 x=0.5*ones(nmp,1);
-m =2; %% 1 = volume constraint, x = clustering stress constraint
+m =2;
 epsimin = 0.0000001;
 n=length(x(:));
 xval=x(:);
@@ -40,7 +39,7 @@ raa     = 0.0001;
 raa0eps = 0.0000001;
 raaeps  = 0.0000001;
 outeriter = 0;
-maxoutit  =50;
+maxoutit  =100;
 kkttol  = 0;
 x_his=zeros(nmp,maxoutit);
 if outeriter < 0.5
@@ -81,12 +80,6 @@ outvector1 = [outeriter innerit xval'];
 outvector2 = [f0val fval'];
 x_his(:,outit)=xmma;
 end
-%% Wang interpolation
-% beta1 = 1; 
-% rho0  = 0.01*ones(nmp,1); 
-% gamma = tanh(beta1*rho0) + tanh(beta1 * (xval - rho0));
-% xval = gamma ./(tanh(beta1*rho0) + tanh(beta1*(1.0-rho0)));
-% figure(7); scatter(carriers(1,:),carriers(2,:),40,-xval,"filled","s");axis equal;axis off; colormap('gray');title('material layout');drawnow;
 %% figure
 figure(6)
 yyaxis left
