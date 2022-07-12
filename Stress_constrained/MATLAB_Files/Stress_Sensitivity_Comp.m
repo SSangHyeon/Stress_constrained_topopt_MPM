@@ -1,6 +1,5 @@
 function [pnorm,pnorm_sen,von,x,ce]=Stress_Sensitivity_Comp(x,penal,q,p,B,D,fd,kp,mpData,tot_uvw,fint)
 addpath('setup','functions');
-nc = 100; sigmay = 10;
 nmp  = length(mpData);                                                      % number of material points  
 von = zeros(nmp,1);
 edofMat = zeros(nmp,8);
@@ -52,32 +51,4 @@ for i=1:nmp
     T2(i)=-lamda(index)'*penal* x(i)^(penal-1) *kp{i,1}*U(index);
 end
 pnorm_sen=T1+T2;
-% %% Cluster %%
-% [von_mises_desc,sort_index]=sort(von,'descend');
-% cluster=zeros(nc,nmp/nc);
-% cluster=reshape(von_mises_desc,[(nmp/nc),nc])';
-% [row,col]=size(cluster);
-% cluster_p=(cluster/sigmay).^p;
-% cluster_sum=sum(cluster_p,2);
-% cluster_mean=cluster_sum./col;
-% sigmapn=(cluster_mean.^(1/p))-1;
-% sigmapn1=(cluster_mean.^((1/p)-1)).*(1/col);
-% derivative0=zeros(nc,nmp);
-% for i=1:row
-%     for j=((i-1)*col)+1:i*col
-%            derivative0(i,sort_index(j))=sigmapn1(i);       
-%     end       
-% end
-% dfdx_0=zeros(nc,nmp);
-% for i=1:nc
-%     dfdx_0(i,:)=derivative0(i,:).*pnorm_sen';
-%     dfdx_1=reshape(dfdx_0(i,:),[nmp,1])';
-%     count=1;
-%     for j=1:nmp
-%         dfdx_2(count,1)=dfdx_1(j);
-%         count=count+1;
-%     end
-%     dfdx_0(i,:)=dfdx_2;
-% end
-% dfdx_0=dfdx_0';
 end
