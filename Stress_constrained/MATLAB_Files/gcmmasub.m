@@ -36,7 +36,7 @@ zeron = zeros(n,1);
 %
 % Calculations of the bounds alfa and beta.
 albefa = 0.01;
-move =0.2;
+move =0.1;
 %
 zzz1 = low + albefa*(xval-low);
 zzz2 = xval - move*(xmax-xmin);

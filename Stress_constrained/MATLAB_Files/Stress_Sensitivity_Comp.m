@@ -1,8 +1,9 @@
-function [pnorm,pnorm_sen,von,x,ce]=Stress_Sensitivity_Comp(x,penal,q,p,B,D,fd,kp,mpData,tot_uvw,fint)
+function [pnorm,pnorm_sen,von,x,c,ce]=Stress_Sensitivity_Comp(x,penal,q,p,B,D,fd,kp,mpData,tot_uvw,fint)
 addpath('setup','functions');
 nmp  = length(mpData);                                                      % number of material points  
 von = zeros(nmp,1);
 edofMat = zeros(nmp,8);
+Emin = 1e-9;
   for i=1:nmp
       J = length(mpData(i).nIN);
       for j=1:J
@@ -12,11 +13,14 @@ edofMat = zeros(nmp,8);
 S = zeros(nmp,3);
 U = zeros(length(tot_uvw),1);
 ce = zeros(length(mpData),1);
-[Kt,kp] = G2P(tot_uvw,mpData,2,x,kp);
+c = 0;
+K=kp;
+[Kt,kp] = G2P(tot_uvw,mpData,2,x,K);
 U(fd)=Kt(fd,fd)\fint(fd);
 for i=1:nmp
     mat = edofMat(i,:);
-    ce(i) = U(mat)'*kp{i,1}*U(mat);
+    c = c + (Emin+x(i)'.^penal*(1-Emin)) * U(mat)' * K{i,1} * U(mat);
+    ce(i) = -penal*x(i)^(penal-1)*(1-Emin) *U(mat)' * K{i,1} * U(mat);
 end
 for i=1:nmp
     temp= (x(i)^q)*(D(:,:,1)*B(:,:,i)*U(edofMat(i,:)))';

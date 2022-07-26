@@ -40,13 +40,13 @@ raa0 = max(raa0eps,(0.1/n)*raa0);
 raa  = abs(dfdx)*xmami;
 raa  = max(raaeps,(0.1/n)*raa);
 if outeriter < 2.5
-  low = xval - 0.5*xmami;
-  upp = xval + 0.5*xmami;
+  low = xval - 0.02*xmami; %asyinit
+  upp = xval + 0.02*xmami; %asyinit
 else
   xxx = (xval-xold1).*(xold1-xold2);
   factor = eeen;
-  factor(find(xxx > 0)) = 1.2;
-  factor(find(xxx < 0)) = 0.7;
+  factor(find(xxx > 0)) = 1.05;  %asyincr
+  factor(find(xxx < 0)) = 0.65;  %asydecr
   low = xval - factor.*(xold1 - low);
   upp = xval + factor.*(upp - xold1);
   lowmin = xval - 10*xmami;

@@ -41,7 +41,7 @@ subsolv(m,n,epsimin,low,upp,alfa,beta,p0,q0,P,Q,a0,a,b,c,d);
 %
 een = ones(n,1);
 eem = ones(m,1);
-epsi = 1;
+epsi = 0.5;
 epsvecn = epsi*een;
 epsvecm = epsi*eem;
 x = 0.5*(alfa+beta);
